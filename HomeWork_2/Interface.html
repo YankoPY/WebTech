@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vote for Available Hours</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+<div class="container">
+    <h1>Vote for Available Hours</h1>
+    <div>
+        <label for="daySelect">Select a Day:</label>
+        <select id="daySelect">
+            <option value="Monday">Monday</option>
+            <option value="Tuesday">Tuesday</option>
+            <option value="Wednesday">Wednesday</option>
+            <option value="Thursday">Thursday</option>
+            <option value="Friday">Friday</option>
+        </select>
+    </div>
+    <div>
+        <label for="hourSlider">Select an Hour:</label>
+        <input type="range" min="12" max="16" value="14" step="0.5" class="slider" id="hourSlider">
+        <p>Selected Hour: <span id="selectedHour">12:00 PM</span></p>
+    </div>
+    <button onclick="castVote()">Vote</button>
+    <ul id="hoursList"></ul>
+</div>
+
+<script src="AvailableHours.js"></script>
+</body>
+</html>
