@@ -1,0 +1,77 @@
+.background-container {
+  background-color: aliceblue;
+  width: 100%;
+  height: 100vh;
+}
+
+.calendar-container {
+  margin: auto;
+  position: relative;
+  padding-top: 10%;
+}
+
+.weekdays-container {
+  display: flex;
+  margin: auto;
+  justify-content: space-around;
+}
+.weekdays-container .week-day {
+  color: black;
+  text-align: center;
+  flex-direction: column;
+}
+
+.header{
+  min-height: 4ch;
+}
+
+.day-votes{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: none;
+}
+
+.hours{
+  border: none;
+  width: 70px;
+  height: 30px;
+  text-align: center;
+  color: black; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vote-button{
+  border-color: aliceblue;
+  width: 150px;
+  height: 30px;
+  text-align: center;
+  margin: 0; 
+  background-color: white; 
+  cursor: pointer;
+}
+
+.vote-button:hover{
+  background-color: 	#E37383;
+  color: white;
+}
+
+.submit-button{
+  border-color: #2D92B3;  
+  width: 250px;
+  height: 40px;
+  text-align: center;
+  margin: 0; 
+  background-color: #ADD8E6;
+  cursor: pointer;
+}
+
+.footer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 2%;
+}
+
