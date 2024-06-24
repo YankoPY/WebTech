@@ -7,6 +7,7 @@ import { ErrorMessage, Field, Form, Formik, replace } from "formik";
 import * as Yup from "yup";
 import { Navigate, Router } from "react-router-dom";
 import { useRouter } from "next/navigation";
+import "../register/registerPage.css"
 
 const validationSchema = Yup.object().shape({
   username: Yup.string().required("Username is required"),
@@ -67,6 +68,10 @@ const router = useRouter();
     setSubmitting(false);
   };
 
+  const logInRedirect = () => {
+    router.replace('./login');
+  };
+
   return (
     <Formik
       initialValues={{ username: "", email: "", password: "" }}
@@ -74,26 +79,34 @@ const router = useRouter();
       onSubmit={handleSubmit}
     >
       {({ isSubmitting }) => (
-        <Form>
-          <div>
-            <label htmlFor="username">Username</label>
-            <Field type="text" name="username" />
-            <ErrorMessage name="username" component="div" />
+        <div className="container">
+        <Form className="form">
+          <div className="group">
+            <h1 className="title">Register</h1>
+            <h2 className="lable">Username</h2>
+            <Field className="lable" type="text" name="username"/>
+            <ErrorMessage className="error" name="username" component="div" />
           </div>
-          <div>
-            <label htmlFor="email">Email</label>
-            <Field type="email" name="email" />
-            <ErrorMessage name="email" component="div" />
+          <div className="group">
+            <h2 className="lable">Email</h2>
+            <Field className="lable" type="email" name="email" />
           </div>
-          <div>
-            <label htmlFor="password">Password</label>
-            <Field type="password" name="password" />
-            <ErrorMessage name="password" component="div" />
+          <div className="group">
+            <h2 className="lable">Password</h2>
+            <Field className="lable" type="password" name="password" />
+            <ErrorMessage className="error" name="password" component="div" />
           </div>
-          <button type="submit" disabled={isSubmitting}>
-            Submit
+          <button type="submit" disabled={isSubmitting} className="registerButton">
+            Register
           </button>
+          <div>
+            <h3 className="message">Already have an account? &nbsp;&nbsp;
+              <button type="button" onClick={logInRedirect} className="loginButton">Log In
+              </button>
+            </h3>
+          </div>
         </Form>
+      </div>
       )}
     </Formik>
   );

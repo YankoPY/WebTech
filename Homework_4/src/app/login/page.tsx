@@ -9,6 +9,7 @@ import { Navigate, Router } from "react-router-dom";
 import { useRouter } from "next/navigation";
 import { POST } from "../api/login/route";
 import { createHmac } from "crypto";
+import "../login/loginPage.css";
 
 const salt = "foo"
 
@@ -64,6 +65,10 @@ const router = useRouter();
     setSubmitting(false);
   };
 
+  const registerRedirect = () => {
+    router.replace('./register');
+  };
+
   return (
     <Formik
       initialValues={{ username: "", password: "" }}
@@ -71,21 +76,30 @@ const router = useRouter();
       onSubmit={handleSubmit}
     >
       {({ isSubmitting }) => (
-        <Form>
-          <div>
-            <label htmlFor="username">Username</label>
-            <Field type="text" name="username" />
-            <ErrorMessage name="username" component="div" />
-          </div>
-          <div>
-            <label htmlFor="password">Password</label>
-            <Field type="password" name="password" />
-            <ErrorMessage name="password" component="div" />
-          </div>
-          <button type="submit" disabled={isSubmitting}>
-            Submit
-          </button>
-        </Form>
+    <div className="container">
+      <Form className="form">
+        <div className="group">
+          <h1 className="title">Sign In</h1>
+           <h2 className="lable">Username</h2>
+          <Field className="lable" type="text" name="username"/>
+          <ErrorMessage className="error" name="username" component="div" />
+        </div>
+        <div className="group">
+          <h2 className="lable">Password</h2>
+          <Field className="lable" type="password" name="password" />
+          <ErrorMessage className="error" name="password" component="div" />
+        </div>
+        <button type="submit" disabled={isSubmitting} className="loginButton">
+          Log In
+        </button>
+        <div>
+        <h3 className="message">Don't have an account? &nbsp;&nbsp;
+        <button type="button" onClick={registerRedirect} className="registerB">Register
+        </button>
+        </h3>
+        </div>
+      </Form>
+    </div>
       )}
     </Formik>
   );
