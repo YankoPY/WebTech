@@ -3,10 +3,13 @@ import * as fs from "fs";
 import { NextApiRequest, NextApiResponse } from "next";
 import { User } from "../../../../models";
 import { NextResponse } from "next/server";
+import { createHmac } from "crypto";
 
 const fileName = "./user.json";
+const salt = "foo"
 
 export async function POST(req: NextApiRequest) {
+
   if (req.method === "POST") {
     const data = loadUsers() || [];
     const user = (await (req as any).json()).user;
@@ -14,6 +17,9 @@ export async function POST(req: NextApiRequest) {
       (u) => u.email === user.email || u.username === user.username
     );
     if (result === -1) {
+      const hash = createHmac('sha256', salt);
+      hash.update(user.password);
+      user.password = hash.digest('hex');
       data.push(user);
       fs.writeFileSync(fileName, JSON.stringify(data));
       return NextResponse.json(user);

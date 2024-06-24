@@ -8,6 +8,9 @@ import * as Yup from "yup";
 import { Navigate, Router } from "react-router-dom";
 import { useRouter } from "next/navigation";
 import { POST } from "../api/login/route";
+import { createHmac } from "crypto";
+
+const salt = "foo"
 
 const validationSchema = Yup.object().shape({
   username: Yup.string().required("Username is required"),
@@ -44,6 +47,9 @@ const router = useRouter();
   }
 
   function login(formData: User) {
+    const hash = createHmac('sha256', salt);
+      hash.update(formData.password);
+      formData.password = hash.digest('hex');
     const result = loginUser(
       formData.username,
       formData.password,
