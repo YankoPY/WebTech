@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import {
   Hour,
   Hours,
@@ -7,57 +7,71 @@ import {
   getWeek,
 } from "../configs/weekdays";
 import DayVotes from "./dayVotes";
+import { saveMarkedHours } from "../handleVotes/VotesUtils";
 
-export function Calendar() {
+type VotesState = Record<number, number[]>;
+
+const Calendar: React.FC = () => {
   const dates = getWeek();
-  const [votes, setVotes] = useState<Record<number, number[]>>({});
+  const [votes, setVotes] = useState<VotesState>({});
+
+  const handleVote = (date: Date, hour: Hour) => {
+    const dayKey = getDay(date);
+    const updatedVotes = { ...votes };
+
+    if (!updatedVotes[dayKey]) {
+      updatedVotes[dayKey] = [];
+    }
+
+    const index = updatedVotes[dayKey].indexOf(hour);
+    if (index !== -1) {
+      updatedVotes[dayKey].splice(index, 1);
+    } else {
+      updatedVotes[dayKey].push(hour);
+    }
+
+    setVotes(updatedVotes);
+  };
+
+  const handleSubmit = () => {
+    saveMarkedHours(votes);
+    window.location.reload();
+  };
+
   return (
-    <div className="background-container">
-      <div className="calendar-container">
-        <div className="hours-container"></div>
-        <div className="weekdays-container">
-          <div className="week-day">
-            <div className="header"></div>
-            {[...Hours].map((h) => (
-              <div className="hours">{h + ":00"}</div>
+      <div className="background-container">
+        <div className="calendar-container">
+          <div className="hours-container"></div>
+          <div className="weekdays-container">
+            <div className="week-day">
+              <div className="header"></div>
+              {[...Hours].map((h) => (
+                  <div className="hours" key={h}>
+                    {h + ":00"}
+                  </div>
+              ))}
+            </div>
+            {dates.map((date) => (
+                <div className="week-day" key={date.getTime()}>
+                  <div className="header">
+                    <div>{getDayString(date)}</div>
+                    <div>{date.getDate()}</div>
+                  </div>
+                  <DayVotes
+                      isVoted={(h: Hour) => votes[getDay(date)]?.includes(h)}
+                      onClick={(h: Hour) => handleVote(date, h)}
+                  />
+                </div>
             ))}
           </div>
-          {dates.map((date) => (
-            <div className="week-day">
-              <div className="header">
-                <div>{getDayString(date)}</div>
-                <div>{date.getDate()}</div>
-              </div>
-              <DayVotes
-                isVoted={(h: Hour) => votes[getDay(date)]?.includes(h)}
-                onClick={(h: Hour) => {
-                  if (!votes[getDay(date)]) {
-                    votes[getDay(date)] = [];
-                    setVotes({ ...votes });
-                  }
-                  if (votes[getDay(date)].includes(h)) {
-                    votes[getDay(date)].splice(
-                      votes[getDay(date)].indexOf(h),
-                      1
-                    );
-                  } else {
-                    votes[getDay(date)].push(h);
-                  }
-                  setVotes({ ...votes });
-                }}
-              />
-            </div>
-          ))}
-        </div>
-        <div className="footer">
-          <button
-            className="submit-button"
-            onClick={() => window.location.reload()}
-          >
-            Submit
-          </button>
+          <div className="footer">
+            <button className="submit-button" onClick={handleSubmit}>
+              Submit
+            </button>
+          </div>
         </div>
       </div>
-    </div>
   );
-}
+};
+
+export default Calendar;

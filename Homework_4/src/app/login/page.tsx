@@ -32,7 +32,7 @@ const router = useRouter();
     })
       .then((response) => {
         if (response.ok) {
-          router.replace('homepage');
+          router.replace('http://localhost:3001');
         } else {
           throw new Error("Failed to login");
         }

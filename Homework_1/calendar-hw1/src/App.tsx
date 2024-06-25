@@ -1,8 +1,6 @@
 import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
-import { Date } from "./components/date";
-import { Hours } from "./configs/weekdays";
+import Date from "./components/date";
 
 function App() {
   return <Date />;
