@@ -7,35 +7,35 @@
 ### 2. Backend: Node.js (Express framework), JSON for data storage.
 
 ## Key Components
-# 1. Calendar Component (Calendar.tsx):
+### 1. Calendar Component (Calendar.tsx):
 - Displays a weekly calendar where users can vote for hours.
 - Fetches the week's dates using getWeek() from ../configs/weekdays.
 - Allows voting for hours using handleVote() and updates state using useState().
 - Submits votes to saveMarkedHours() on button click.
 
-# 2. DayVotes Component (DayVotes.tsx):
+### 2. DayVotes Component (DayVotes.tsx):
 - Renders buttons for each hour of the day (Hours array).
 - Indicates if an hour has been voted for (isVoted() function).
 - Handles hour voting on button click (onClick() function).
 
-# 3. Date Component (Date.tsx):
+### 3. Date Component (Date.tsx):
 - Wraps the Calendar component to display it within a date picker layout.
 
-# 4. Node.js Server (server.js):
+### 4. Node.js Server (server.js):
 - Uses Express for handling API requests.
 - Provides a POST endpoint /api/saveVotes to save votes to a local JSON file (votes.json).
 
-# 5. Utility Functions (../handleVotes/SaveVotes.ts)
+### 5. Utility Functions (../handleVotes/SaveVotes.ts)
 - saveMarkedHours(votes: Record<number, Hour[]>): Saves marked votes to local storage (localStorage).
 - getMostVotedFromLocalStorage(): Retrieves the most voted date and hour from localStorage.
 
 ## Data Handling
-# LocalStorage: Used to store user votes locally (saveMarkedHours()).
-# Server-side: Saves votes to votes.json using Express API (/api/saveVotes).
+### LocalStorage: Used to store user votes locally (saveMarkedHours()).
+### Server-side: Saves votes to votes.json using Express API (/api/saveVotes).
 
 ## Security
-# Password Hashing: User passwords are hashed using SHA-256 before storage (createHmac() in login and register processes).
-# Validation: Form inputs are validated using Yup schema validation in Formik forms (validationSchema).
+### Password Hashing: User passwords are hashed using SHA-256 before storage (createHmac() in login and register processes).
+### Validation: Form inputs are validated using Yup schema validation in Formik forms (validationSchema).
 
 # Getting Started
 ## 1. Setup:
