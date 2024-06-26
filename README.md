@@ -1,6 +1,6 @@
 # Vote for Meeting (Doodle)
 ## Overview
-### The Voting Calendar project is a web application built with React that allows users to vote for preferred hours across a weekly calendar. It includes functionalities for voting, saving votes locally and on a server, and displaying the most voted date and hour.
+### The Vote for Meeting project is a web application built with React that allows users to vote for preferred hours across a weekly calendar. It includes functionalities for voting, saving votes locally and on a server, and displaying the most voted date and hour.
 
 ## Technologies Used
 ### 1. Frontend: React, TypeScript, Formik (for forms), Yup (for form validation), CSS for styling.
